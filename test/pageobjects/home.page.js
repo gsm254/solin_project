@@ -24,6 +24,18 @@ class HomePage extends Page {
     get opportunitiesLink () {
         return $('a=Opportunities')
     }
+    get productsLink () {
+        return $('a=Products')
+    }
+    get TroubleTicketLink () {
+        return $('a=Trouble Tickets')
+    }
+    get VendorsLink () {
+        return $('a=Vendors')
+    }
+    get InvoiceLink () {
+        return $('a=Invoice')
+    }
    
 }
 

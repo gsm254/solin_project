@@ -1,7 +1,7 @@
 describe('create org, contact', () => {
     it('Login to application', async () => {
 
-        await browser.url("http://testingserver:8888");
+        await browser.url("http://testingserver:8888")
 
         const userName = await browser.$("input[name='user_name']")
         await userName.setValue('admin')

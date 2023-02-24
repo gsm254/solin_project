@@ -1,41 +1,58 @@
-import LoginPage from '../pageobjects/loginpage.js'
+import LoginPage from '../pageobjects/login.page.js'
 import OrgPage from '../pageobjects/organizations.page.js'
 import HomePage from '../pageobjects/home.page.js'
 
 describe('create org, contact', () => {
+
     it('Login to application', async () => {
 
-        // await browser.url("http://testingserver:8888");
         await LoginPage.open()
-        await LoginPage.username.toBeDisplayed;
+
+        await LoginPage.username.toBeDisplayed();
         expect(await browser.getTitle()).toHaveUrlContaining("vtiger")
 
         await LoginPage.login("admin", "admin")
-
-        // await LoginPage.username.setValue('admin')
-
-        // const passWord = await browser.$("input[name='user_password']")
-        // await passWord.setValue('admin')
-        // const loginBtn = await browser.$("input[id='submitButton']")
-        // await loginBtn.click()
         expect(await browser.getTitle()).toHaveTitleContaining("Home")
     })
-    var orgN;
+    let orgN;
+    let rdn = Math.round(Math.random() * (99 - 5) + 5)
 
     it('create org', async () => {
-        orgN = 'RMon' + Math.round(Math.random() * (30 - 5) + 5)
 
-        await (await HomePage.organizationsLink).click()
+        orgN = 'RMon' + rdn
+
+            (await HomePage.organizationsLink).click()
         expect(await browser.getTitle()).toHaveTitleContaining("Organizations")
 
-        await (await OrgPage.createOrganization).click()
+
+            (await OrgPage.createOrganization).click()
         expect(await browser.$('.lvtHeaderText')).toBeDisplayed()
-       
-        await (await OrgPage.orgNameTextField).addValue(orgN)
-        await (await OrgPage.saveBtn).click()
-        
+
+        //filling the org details
+        await (await OrgPage.orgName).addValue(orgN)
+        await (await OrgPage.website).addValue(`https://www.rmon${rdn}.com`)
+        await (await OrgPage.phoneNo).addValue(`97689752${rdn}`)
+        await (await OrgPage.email).addValue(`rmon${rdn}@gmail.com`)
+        await (await OrgPage.employees).addValue(`${rdn}`)
+        await (await OrgPage.industry).selectByAttribute('value', 'Banking')
+        await (await OrgPage.type).selectByAttribute('value', 'Investor')
+        await (await OrgPage.billAddress).addValue(`no 73, whitefield${rdn}`)
+        await (await OrgPage.bill_pobox).addValue(`whitefield${rdn}`)
+        await (await OrgPage.bill_city).addValue(`Bengaluru${rdn}`)
+        await (await OrgPage.bill_state).addValue(`Karnataka${rdn}`)
+        await (await OrgPage.bill_code).addValue(`5700${rdn}`)
+        await (await OrgPage.bill_country).addValue(`India${rdn}`)
+        await (await OrgPage.copyBill).click()
+
+
+
+
+        //await (await OrgPage.saveBtn)[1].scrollIntoView()
+        await (await OrgPage.saveBtn)[1].click()
+
         await (await browser.$('span=' + orgN)).waitForDisplayed()
         expect(await OrgPage.orgInfo).toBeDisplayed()
+
     })
 
     it('create contact', async () => {
@@ -79,3 +96,4 @@ describe('create org, contact', () => {
         expect(contactInfo).toBeDisplayed;
     })
 })
+

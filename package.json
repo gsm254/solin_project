@@ -2,8 +2,8 @@
   "name": "my-new-project",
   "type": "module",
   "devDependencies": {
-    "@wdio/cli": "^8.3.9",
-    "@wdio/local-runner": "^8.3.9",
+    "@wdio/cli": "^8.3.10",
+    "@wdio/local-runner": "^8.3.10",
     "@wdio/mocha-framework": "^8.3.0",
     "@wdio/spec-reporter": "^8.3.0",
     "chromedriver": "^110.0.0",

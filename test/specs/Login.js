@@ -1,4 +1,4 @@
-import LoginPage from '../pageobjects/loginpage.js'
+import LoginPage from '../pageobjects/login.page.js'
 
 describe('create org, contact,oppurtunity', () => {
     it('Login to application', async () => {

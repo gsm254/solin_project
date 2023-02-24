@@ -1,4 +1,5 @@
 //create organization, delete org and check it is present in recycle bin and empty the 
+var name;
 describe('create, delete organization and check in recycle bin', () => {
     it('Login to application', async () => {
 
