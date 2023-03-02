@@ -1,3 +1,6 @@
+import { expect } from "chai"
+
+
 export const config = {
     //
     // ====================
@@ -59,7 +62,13 @@ export const config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        'goog:chromOptions':{
+            prefs:{
+                //0-Default, 1-Allow, 2-Block
+                'profile.managed_default_content_settings.notifications':1
+            }
+        }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -197,8 +206,9 @@ export const config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        global.expect = expect;
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
@@ -222,6 +232,7 @@ export const config = {
      * beforeEach in Mocha)
      */
     // beforeHook: function (test, context) {
+    //     global.expect = expect;
     // },
     /**
      * Hook that gets executed _after_ a hook within the suite starts (e.g. runs after calling

@@ -4,24 +4,28 @@ class ProductPage extends Page{
     get createProduct(){
         return $('aria/Create Product...')
     }
-    get productName(){
-        return $('[name="productname"]')
+    
+    
+   
+    get searchTextField(){
+        return $('//input[@name="search_text"]')
     }
-    get unit_price(){
-        return $('[name="unit_price"]')
+    get searchBy(){
+        return $('//select[@name="search_field"]')
     }
-    get unit_price(){
-        return $('[name="unit_price"]')
+    get searchBtn(){
+        return $('//input[@name="search"]')
     }
-    get stock(){
-        return $('[name="qtyinstock"]')
-    }
-    get saveBtn(){
-        return $('aria/Save [Alt+S]')
+
+    //************************************************************************************************************** */
+
+    
+    
+    async searchProduct(name,select){
+        await (await this.searchTextField).setValue(name);
+        await (await this.searchBy).selectByVisibleText(select);
+        await(await this.searchBtn).click()
     }
     
-    get productInfo(){
-        return $('.lvtHeaderText')
-    }
 }
 export default new ProductPage()

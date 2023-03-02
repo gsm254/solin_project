@@ -7,8 +7,8 @@ import vendorsPage from "../pageobjects/vendors.page.js";
 
 describe("tc4", () => {
     it('login', async () => {
-       // await loginPage.open()
-       await browser.url('http://localhost:8888')
+        // await loginPage.open()
+        await browser.url('http://localhost:8888')
         await browser.maximizeWindow()
         expect(browser).toHaveTitleContaining("vtiger")
             ; (await loginPage.username).waitForDisplayed()
@@ -28,7 +28,7 @@ describe("tc4", () => {
             ; (await vendorsPage.vendor_email).setValue(`nithish${rdn}@gmail.com`)
             ; (await vendorsPage.vendor_phone).setValue(`1234561${rdn}`)
             ; (await vendorsPage.saveBtn).click()
-        ; (await browser.$('//span[@class="lvtHeaderText"]')).waitForDisplayed()
+            ; (await browser.$('//span[@class="lvtHeaderText"]')).waitForDisplayed()
         expect(await (await browser.$('//span[@class="lvtHeaderText"]')).getText()).toContain(vdrName)
 
     })
@@ -37,17 +37,17 @@ describe("tc4", () => {
             ; (await homePage.InvoiceLink).click()
         expect(browser).toHaveTitleContaining("Invoice")
             ; (await invoicePage.createInvoice).click()
-            ;(await browser.$('//span[contains(.,"New Invoice")]')).waitForDisplayed()
+            ; (await browser.$('//span[contains(.,"New Invoice")]')).waitForDisplayed()
         expect(await (await browser.$('//span[contains(.,"New Invoice")]')).getText()).toContain("Creating New Invoice")
             ; (await invoicePage.selecrOrganization).click()
 
-       // browser.switchWindow("testingserver:8888/index.php?module=Accounts&action=Popup&popuptype=specific_account_address&form=TasksEditView&form_submit=false&fromlink=")
+        // browser.switchWindow("testingserver:8888/index.php?module=Accounts&action=Popup&popuptype=specific_account_address&form=TasksEditView&form_submit=false&fromlink=")
         browser.switchWindow("localhost:8888/index.php?module=Accounts&action=Popup&popuptype=specific_account_address&form=TasksEditView&form_submit=false&fromlink=")
             ; (await organizationsPage.searchTextField).setValue("org65")
             ; (await organizationsPage.searchBtn).click()
             ; (await browser.$('a="org65"')).click
 
-       // await browser.switchWindow("http://testingserver:8888/index.php?module=Invoice&action=EditView&return_action=DetailView&parenttab=Sales")
+        // await browser.switchWindow("http://testingserver:8888/index.php?module=Invoice&action=EditView&return_action=DetailView&parenttab=Sales")
         await browser.switchWindow("http://localhost:8888/index.php?module=Invoice&action=EditView&return_action=DetailView&parenttab=Sales")
         await (await invoicePage.billAddress).addValue(`no 73, whitefield${rdn}`)
         await (await invoicePage.bill_pobox).addValue(`whitefield${rdn}`)
@@ -57,7 +57,7 @@ describe("tc4", () => {
         await (await invoicePage.bill_country).addValue(`India${rdn}`)
         await (await invoicePage.copyBill).click()
             ; (await invoicePage.product).click()
-           // ; await browser.switchWindow("testingserver:8888/index.php?module=Products&action=Popup&html=Popup_picker&select=enable&form=HelpDeskEditView&popuptype=inventory_prod&curr_row=1&return_module=Invoice&currencyid=1")
+            // ; await browser.switchWindow("testingserver:8888/index.php?module=Products&action=Popup&html=Popup_picker&select=enable&form=HelpDeskEditView&popuptype=inventory_prod&curr_row=1&return_module=Invoice&currencyid=1")
             ; await browser.switchWindow("localhost:8888/index.php?module=Products&action=Popup&html=Popup_picker&select=enable&form=HelpDeskEditView&popuptype=inventory_prod&curr_row=1&return_module=Invoice&currencyid=1")
             ; (await organizationsPage.searchTextField).call(productPage).setValue("classmate184")
             ; (await organizationsPage.searchBtn).call(invoicePage).click()

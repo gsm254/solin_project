@@ -7,36 +7,50 @@ class HomePage extends Page {
     /**
      * define selectors using getter methods
      */
-    get organizationsLink () {
+    get organizationsLink() {
         return $('a=Organizations')
     }
 
-    get contactsLink () {
+    get contactsLink() {
         return $('a=Contacts')
     }
 
-    get moreLink () {
+    get moreLink() {
         return $('a=More')
     }
-    get recycleBinLink () {
+    get recycleBinLink() {
         return $('a=Recycle Bin')
     }
-    get opportunitiesLink () {
+    get opportunitiesLink() {
         return $('a=Opportunities')
     }
-    get productsLink () {
+    get productsLink() {
         return $('a=Products')
     }
-    get TroubleTicketLink () {
+    get TroubleTicketLink() {
         return $('a=Trouble Tickets')
     }
-    get VendorsLink () {
+    get VendorsLink() {
         return $('a=Vendors')
     }
-    get InvoiceLink () {
+    get InvoiceLink() {
         return $('a=Invoice')
     }
-   
+    get userLookUp() {
+        return $('//span[@class= "userName"]/../following-sibling::td[1]/img')
+    }
+    get signout() {
+        return $("//a[.='Sign Out']")
+    }
+
+    async signout() {
+        await this.userLookUp.moveTo()
+        await this.signout.click()
+    }
+    async moreHover(){
+        (await this.moreLink).moveTo()
+    }
+
 }
 
 export default new HomePage()
