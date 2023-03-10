@@ -13,7 +13,7 @@ class OrganizationsPage {
         return $('[name="search_text"]')
     }
     get searchBtn() {
-        return $('[name="search"]')
+        return $('//input[@name="search" or @name ="submit"]')
     }
     get searchByDropDown() {
         return $('[name="search_field"]')
@@ -22,9 +22,9 @@ class OrganizationsPage {
 
     /********************************* */
     async search(searchText, searchBy) {
-        (await this.searchTextField).setValue(searchText)
-            ; (await this.searchByDropDown).selectByVisibleText(searchBy)
-            ; (await this.searchBtn).click()
+       await (await this.searchTextField).setValue(searchText)
+            ;await (await this.searchByDropDown).selectByVisibleText(searchBy)
+            ; await(await this.searchBtn).click()
             
     }
 

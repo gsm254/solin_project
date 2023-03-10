@@ -1,6 +1,6 @@
 class InvoiceDetailedView{
     get invoiceInfoHeader(){
-        return $('span[@class="dvHeaderText"]')
+        return $('//span[@class="lvtHeaderText"]')
     }
     async getInvoiceInfoHeader(){
         return await (await this.invoiceInfoHeader).getText()

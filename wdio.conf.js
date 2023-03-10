@@ -28,6 +28,9 @@ export const config = {
     specs: [
         './test/specs/**/*.js'
     ],
+    suites:{
+        smoke:['test/spec_pom_lib_scripts/CreateOrgContact.js','test/spec_pom_lib_scripts/productTicket.js']
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -54,7 +57,8 @@ export const config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
+    capabilities: [
+        {
     
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
@@ -68,12 +72,18 @@ export const config = {
                 //0-Default, 1-Allow, 2-Block
                 'profile.managed_default_content_settings.notifications':1
             }
-        }
+        }},
+        // {
+        //     maxInstances:5,
+        //     browserName:'firefox',
+        //     acceptInsecureCerts:true
+        // }
+
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
         // excludeDriverLogs: ['bugreport', 'server'],
-    }],
+],
     //
     // ===================
     // Test Configurations
@@ -143,7 +153,12 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec'],
+    // reporters:['spec']
+    reporters: [['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+    }]],
 
 
     
@@ -207,7 +222,7 @@ export const config = {
      * @param {Object}         browser      instance of created browser/device session
      */
     before: function (capabilities, specs) {
-        global.expect = expect;
+       // global.expect = expect;
     },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -250,8 +265,14 @@ export const config = {
      * @param {Boolean} result.passed    true if test has passed, otherwise false
      * @param {Object}  result.retries   informations to spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
+    afterTest:
+    //  function(test, context, { error, result, duration, passed, retries }) {
     // },
+    async function (step, scenario, { error, duration, passed }, context) {
+        if (error) {
+          await browser.takeScreenshot();
+        }
+      },
 
 
     /**

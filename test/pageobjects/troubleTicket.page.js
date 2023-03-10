@@ -51,30 +51,31 @@ class TroubleTicketsPage extends Page {
             ; (await this.categories).selectByAttribute('value', 'Small Problem')
             ; (await this.parentType).selectByAttribute('value', 'Organizations')
             ; (await this.parentName).click()
-        
+
         await browser.waitUntil(async () => (await browser.getWindowHandles()).length > 1)
-      /* let pwin;
-     browser.getWindowHandle().then(values=>pwin=values)
-      let cwin;
-    browser.getWindowHandles().then(values=>cwin=values)
-      let cwi = cwin.filter(ele=>ele!==pwin) */
-      const windows = await browser.getWindowHandles()
-         await browser.switchToWindow(windows[1])
-        /* await browser.waitUntil(async () =>
-            await browser.switchWindow('localhost:8888/index.php?module=Accounts&action=Popup&html=Popup_picker&form=HelpDeskEditView&fromlink=')
-        ) */
+        /* let pwin;
+       browser.getWindowHandle().then(values=>pwin=values)
+        let cwin;
+      browser.getWindowHandles().then(values=>cwin=values)
+        let cwi = cwin.filter(ele=>ele!==pwin) */
+        const windows = await browser.getWindowHandles()
+        await browser.switchToWindow(windows[1])
+            /* await browser.waitUntil(async () =>
+                await browser.switchWindow('localhost:8888/index.php?module=Accounts&action=Popup&html=Popup_picker&form=HelpDeskEditView&fromlink=')
+            ) */
 
-            ; (await browser.$('//a[@id="1"]')).click()
+            ; await (await browser.$('//a[@id="1"]')).click()
         await browser.switchToWindow(windows[0])
 
-            ; (await this.productName).click()
-        await browser.switchWindow('testingserver:8888/index.php?module=Products&action=Popup&html=Popup_picker&form=HelpDeskEditView&popuptype=specific&fromlink=')
-       /*  await browser.waitUntil(async () =>
-            await browser.switchWindow('localhost:8888/index.php?module=Products&action=Popup&html=Popup_picker&form=HelpDeskEditView&popuptype=specific&fromlink=')
-        ) */
+            ; await(await this.productName).click()
+        let win = await browser.getWindowHandles()
+        await browser.switchToWindow(win[1])
+            /*  await browser.waitUntil(async () =>
+                 await browser.switchWindow('localhost:8888/index.php?module=Products&action=Popup&html=Popup_picker&form=HelpDeskEditView&popuptype=specific&fromlink=')
+             ) */
 
-            ; (await browser.$('//a[@id="1"]')).click()
-        await browser.switchToWindow(windows[0])
+            ;await (await browser.$('//a[@id="1"]')).click()
+        await browser.switchToWindow(win[0])
             ; (await this.status).selectByAttribute('value', 'Open')
             ; (await this.description).addValue("troublesome")
             ; (await this.saveBtn).click()

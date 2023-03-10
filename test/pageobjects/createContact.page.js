@@ -26,7 +26,7 @@ class CreateContactPage {
             ; await (await this.orgSelect).click()
         let winds = await browser.getWindowHandles()
         await browser.switchToWindow(winds[1])
-       await  organizationsPage.search("Anup Raj","Orgnaization Name")
+       await  organizationsPage.search("Anup Raj"+rdn,"Organization Name")
         ;await  (await browser.$('//a[@id="1"]')).click()
        await  browser.switchToWindow(winds[0])
         ;await (await this.saveBtn).click()

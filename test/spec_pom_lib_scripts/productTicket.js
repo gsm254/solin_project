@@ -1,3 +1,4 @@
+import {expect} from "chai"
 import createProductPage from "../pageobjects/createProduct.page.js"
 import { default as homePage } from "../pageobjects/home.page.js"
 import { default as loginPage } from "../pageobjects/login.page.js"
@@ -20,11 +21,14 @@ describe('create proudct and create trouble ticket for it', () => {
     it('create prodcut', async () => {
         let pen = "classmate"
         await homePage.productsLink.click()
-        expect(browser).toHaveTitleContaining("Products")
+       // expect(browser).toHaveTitleContaining("Products")
+       expect(await browser.getTitle()).to.contain("Products")
         await (await productPage.createProduct).click()
-        expect(await browser.getUrl()).toHaveUrlContaining('action=EditView')
+        //expect(await browser.getUrl()).toHaveUrlContaining('action=EditView')
+        expect(await browser.getUrl()).to.contain('action=EditView')
         await createProductPage.createProducts(pen, 20, 2000, rdn)
-        expect(await productInfoPage.getProductInfoHeader()).toContain(pen+rdn)
+       // expect(await productInfoPage.getProductInfoHeader()).toContain(pen+rdn)
+       expect(await productInfoPage.getProductInfoHeader()).to.contain(pen+rdn)
 
     })
     // it('verify created product', async () => {
@@ -33,9 +37,10 @@ describe('create proudct and create trouble ticket for it', () => {
 
     it('create trouble ticket', async () => {
         await homePage.TroubleTicketLink.click()
-        expect(browser).toHaveTitleContaining("Tickets")
+        //expect(browser).toHaveTitleContaining("Tickets")
+        //expect(browser).toHaveTitleContaining("Tickets")
         await troubleTicketPage.createTroubleTicket(rdn)
-        expect(await TroubleTicketInfoPage.getTicketInfoHeader()).toContain("t1"+rdn)
+        expect(await TroubleTicketInfoPage.getTicketInfoHeader()).to.contain("t1"+rdn)
 
     })
 })

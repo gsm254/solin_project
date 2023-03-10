@@ -17,11 +17,11 @@ class CreateProduct {
 
     async createProducts(name, unit_price, stock, rdn) {
 
-        await this.createProduct.click()
-        await this.productName.setValue(name + rdn)
-        await this.unit_price.setValue(unit_price)
-        await this.stock.setValue(stock)
-        await this.saveBtn.click()
+        //await (await this.createProduct).click()
+        await (await this.productName).setValue(name + rdn)
+        await (await this.unit_price).setValue(unit_price)
+        await (await this.stock).setValue(stock)
+        await (await this.saveBtn).click()
     }
 }
 export default new CreateProduct()
